@@ -8,7 +8,10 @@ End-users can check this dashboard during percieved outages.
 (Future - Owners can configure webhooks for sending Alerts to Chat applications)
 
 ### Education
-This project also serves as an introductory project for learning some Golang concepts. 
+This project also serves as an introductory project for learning some Golang concepts.
+
+### Structure
+Structure of the project will be within compliance with [golang-standards/project-layout](https://github.com/golang-standards/project-layout)
 
 ## Current Thoughts
 Space to Brain Storm thoughts and ideas for execution
