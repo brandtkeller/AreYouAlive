@@ -27,11 +27,13 @@ Space to Brain Storm thoughts and ideas for execution
 - Execution Thread
     - Target Update
 
-### Initial Functionality
+### Initial Functionality (Iteration #1)
+The focus of the first iteration will be a service that consumes a configuration file of target information and delivers a user interface for the current state of the targets. State of the targets will be queried via a goroutine and will have a channel back to send updates / update notices.
 - Create the `target` object struct
     - Create a test data-set
 - Create `/target` CRUD API's
-    - POST, GET, PUT, DELETE
+    - GET `/target`
+    - GET `/target/{id}`
     - Confirm functionality via `CURL`
     - Write Initial tests
 - Create execution goroutine
@@ -40,6 +42,12 @@ Space to Brain Storm thoughts and ideas for execution
         - Loop
             - Execute target query (How-many of these can we execute sequentially?)
             - Sleep for interval time `time.Sleep( interval * time.Second)`
+- React frontend web application served via `/` endpoint (GET)
+- Websocket established between backend/frontend for updates from execution thread
+### Iteration #2
+This is till to-be-determined. I would like to implement a full CRUD API for targets and allow the service to have a database for which to store state. An administrative dashboard would then allow admins to add targets dynamically.
+- Configurable target health query parameters would be a nice to have. 
+- Webhooks for MM integrations or other integrations would be a nice to have.
 
 ### Other Considerations
 - Test Driven Development
