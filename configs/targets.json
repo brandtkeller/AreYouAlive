@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "url": "test-one.com",
+        "interval": 30
+    },
+    {
+        "id": 2,
+        "url": "test-two.com",
+        "interval": 60
+    }
+]
