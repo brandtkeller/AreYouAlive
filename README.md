@@ -7,11 +7,6 @@ End-users can check this dashboard during percieved outages.
 
 (Future - Owners can configure webhooks for sending Alerts to Chat applications)
 
-## Current Work-In-Progress
-- Conversion to a proper project structure
-- consume a json file and iterate over it
-- Re-Introduce the REST server 
-
 ### Education
 This project also serves as an introductory project for learning some Golang concepts.
 

@@ -3,9 +3,11 @@ package main
 import (
 	"os"
 	"fmt"
+	"io/ioutil"
+	"encoding/json"
 
-	// "AreYouAlive/pkg/app"
-	"AreYouAlive/pkg/api"
+	"github.com/brandtkeller/AreYouAlive/pkg/api"
+	"github.com/brandtkeller/AreYouAlive/pkg/app"
 )
 
 func main() {
@@ -25,33 +27,26 @@ func run() error {
 		return err
 	}
 
-	fmt.Println(data)
+	server := app.NewServer(data)
 
-	// for i := 0; i < len(data); i++ {
-	// 	fmt.Println("User Type: " + users.Users[i].Type)
-	// 	fmt.Println("User Age: " + strconv.Itoa(users.Users[i].Age))
-	// 	fmt.Println("User Name: " + users.Users[i].Name)
-	// 	fmt.Println("Facebook Url: " + users.Users[i].Social.Facebook)
-	// }
+	err = server.Run()
 
-	// server := app.NewServer(router, data)
-
-	// start the server
-	// err = server.Run()
-
-	// if err != nil {
-	// 	return err
-	// }
+	if err != nil {
+		return err
+	}
 
 	return nil
 }
 
-func loadData() ([]targets, error) {
-	jsonFile, err := os.Open("targets.json")
+func loadData() ([]api.Target, error) {
+	pwd, _ := os.Getwd()
+	fmt.Println(pwd)
+	jsonFile, err := os.Open(pwd + "/configs/targets.json")
 	// if we os.Open returns an error then handle it
 	if err != nil {
 		fmt.Println(err)
 	}
+	fmt.Println(jsonFile)
 	fmt.Println("Successfully Opened targets.json")
 	// defer the closing of our jsonFile so that we can parse it later on
 	defer jsonFile.Close()
@@ -59,12 +54,14 @@ func loadData() ([]targets, error) {
 	// read our opened jsonFile as a byte array.
 	byteValue, _ := ioutil.ReadAll(jsonFile)
 
-	// we initialize our Users array
-	var targets Targets
+	// we initialize our Targets array
+	var targets []api.Target
 
 	// we unmarshal our byteArray which contains our
-	// jsonFile's content into 'users' which we defined above
+	// jsonFile's content into 'targets' which we defined above
 	json.Unmarshal(byteValue, &targets)
+
+	fmt.Println(len(targets))
 
 	return targets, nil
 }
