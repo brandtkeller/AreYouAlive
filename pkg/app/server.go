@@ -3,6 +3,8 @@ package app
 import (
 	"net/http"
 	"log"
+	"fmt"
+	"time"
 
 	"github.com/gorilla/mux"
 
@@ -23,11 +25,16 @@ func NewServer(targets []api.Target) *Server {
 	}
 }
 
+func index(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Endpoint Hit: GET /")
+    http.ServeFile(w, r, "web/build/index.html")
+}
+
 func (s *Server) Run() error {
 	// run function that initializes the router
 	router := s.router
 
-	// router.HandleFunc("/", rootHandler).Methods("GET")
+	router.HandleFunc("/", index).Methods("GET")
 
 	// // ----- GET all targets -----
 	router.HandleFunc("/target", func(w http.ResponseWriter, r *http.Request) {
@@ -41,8 +48,19 @@ func (s *Server) Run() error {
 
 	// Health check GET endpoint
 	router.HandleFunc("/health", api.HealthCheck).Methods("GET")
-	
-    log.Fatal(http.ListenAndServe("localhost:8080", router))
+
+	buildHandler := http.FileServer(http.Dir("web/build"))
+    router.PathPrefix("/").Handler(buildHandler)
+
+    srv := &http.Server{
+        Handler:      router,
+        Addr:         "0.0.0.0:3000",
+        WriteTimeout: 15 * time.Second,
+        ReadTimeout:  15 * time.Second,
+    }
+
+    fmt.Println("Server started on PORT 3000")
+    log.Fatal(srv.ListenAndServe())
 
 	return nil
 }

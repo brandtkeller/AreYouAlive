@@ -13,6 +13,19 @@ This project also serves as an introductory project for learning some Golang con
 ### Structure
 Structure of the project will be within compliance with [golang-standards/project-layout](https://github.com/golang-standards/project-layout)
 
+`cmd/areYouAlive/main.go`   - Entrypoint into the application
+
+`configs/*`                 - Configuration files (Mostly for test stubs currently)
+
+`web/*`                     - React application development and build directory (Single Page App)
+
+`pkg/*`                     - Potential packages of re-usable content (TBD?)
+
+### Development
+For development of the GO application - `go run cmd/areYouAlive/main.go` will run/start the backend
+
+For development of the React Frontend - `yarn start` from the `web/` directory
+
 ## Current Thoughts
 Space to Brain Storm thoughts and ideas for execution
 
