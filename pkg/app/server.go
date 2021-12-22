@@ -61,6 +61,5 @@ func (s *Server) Run() error {
 
     fmt.Println("Server started on PORT 3000")
     log.Fatal(srv.ListenAndServe())
-
 	return nil
 }

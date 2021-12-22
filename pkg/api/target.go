@@ -4,16 +4,23 @@ import (
 	"net/http"
 	"fmt"
     "strconv"
+	"time"
 
     "github.com/gorilla/mux"
 
 	"github.com/brandtkeller/AreYouAlive/pkg/common"
 )
 
+type TargetCheck struct {
+	CheckTime	time.Time	`json: checkTime`
+	Check		bool		`json: check`
+}
+
 type Target struct {
     Id 		 int 	`json:"id"`
     Url 	 string `json:"url"`
 	Interval int 	`json:"interval"`
+	Checks	 []TargetCheck	`json:checks`
 }
 
 func GetAllTargets( w http.ResponseWriter, req *http.Request, targets *[]Target ) {

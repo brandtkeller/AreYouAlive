@@ -28,6 +28,7 @@ func run() error {
 	}
 
 	server := app.NewServer(data)
+	fmt.Println(server)
 
 	err = server.Run()
 
