@@ -25,6 +25,10 @@ func NewServer(targets []api.Target) *Server {
 	}
 }
 
+func (s *Server) GetTargets() ([]api.Target) {
+	return s.targets
+}
+
 func index(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Endpoint Hit: GET /")
     http.ServeFile(w, r, "web/build/index.html")

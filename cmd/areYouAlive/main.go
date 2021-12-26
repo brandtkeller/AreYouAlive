@@ -27,8 +27,10 @@ func run() error {
 		return err
 	}
 
-	server := app.NewServer(data)
-	fmt.Println(server)
+	server := app.NewServer(data[:])
+	// This will return the array of targets - this should likely be pointers instead
+	// this should be a pointer to an array of pointers?
+	fmt.Println(server.GetTargets())
 
 	err = server.Run()
 
@@ -65,4 +67,9 @@ func loadData() ([]api.Target, error) {
 	fmt.Println(len(targets))
 
 	return targets, nil
+}
+
+func dataAsSliceReferenceThread([]api.Target) {
+	// Write a test function here that sleeps for 60 seconds and then modifies the slice data
+	// we can test how this affects the data referenced here AND in the main thread
 }
