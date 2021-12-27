@@ -3,6 +3,7 @@ package main
 import (
 	"os"
 	"fmt"
+	"time"
 	"io/ioutil"
 	"encoding/json"
 
@@ -31,6 +32,8 @@ func run() error {
 	// This will return the array of targets - this should likely be pointers instead
 	// this should be a pointer to an array of pointers?
 	fmt.Println(server.GetTargets())
+
+	go dataAsSliceReferenceThread(data[:])
 
 	err = server.Run()
 
@@ -69,7 +72,11 @@ func loadData() ([]api.Target, error) {
 	return targets, nil
 }
 
-func dataAsSliceReferenceThread([]api.Target) {
+func dataAsSliceReferenceThread(targets []api.Target) {
 	// Write a test function here that sleeps for 60 seconds and then modifies the slice data
 	// we can test how this affects the data referenced here AND in the main thread
+	time.Sleep(20 * time.Second)
+
+	targets[1].Interval = 90
+
 }

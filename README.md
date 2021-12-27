@@ -27,7 +27,11 @@ For development of the GO application - `go run cmd/areYouAlive/main.go` will ru
 For development of the React Frontend - `yarn start` from the `web/` directory
 
 ## Current Thoughts
-Space to Brain Storm thoughts and ideas for execution
+- Execution Threads
+    - Need to handle and coordinate graceful shutdowns
+    - Main will run a checker-controller function as a goroutine
+        - This will spawn and monitor checker-agent goroutines and restart if required
+        - Checker-agents will need to have a channel with the http server for sending updates via websocket
 
 ### Application Structure
 - Main Thread
